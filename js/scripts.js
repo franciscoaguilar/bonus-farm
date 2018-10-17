@@ -1,38 +1,28 @@
-$(document).ready(function(){
-  // var numberOfPPl = 19;
-  // var numberOfPPl = $('#number-of-ppl').val();
-
-  //var bins = 88;
-  var bins = parseInt($('#bins').val());
-
-  var hoursWorked = parseInt($('#hours').val());
-  //var hoursWorked = 7;
-
-  var minBins = parseInt($('minBins').val();
-  //var minBins = .480;
-
-  var binBonusRate = parseInt($('#binBonusRate').val());
-  //var binBonusRate = 10;
-
-
+$(document).ready(function() {
 
 
 
   $('#button').on('click', function(e){
-    var numberOfPPl = parseInt($('#number-of-ppl').val());
     e.preventDefault();
-    console.log(numberOfPPl);
+    var numberOfPPl = parseFloat($('#number-of-ppl').val());
+    var bins = parseFloat($('#bins').val());
+    var hoursWorked = parseFloat($('#hours').val());
+    var minBins = parseFloat($('#minBins').val());
+    var binBonusRate = parseFloat($('#binBonusRate').val());
+    var crewBossBonusRate = parseFloat($('#crewBossBonusRate').val());
+
     let binsPerPerson = bins / numberOfPPl;
-    console.log(binsPerPerson);
     let employeeBinsPerhour= binsPerPerson / hoursWorked;
-    console.log(employeeBinsPerhour);
     let extraBins = employeeBinsPerhour - minBins;
     let extrabinsDay = extraBins * hoursWorked;
     let numberOfBinsBonus = extrabinsDay * numberOfPPl;
-    let totalCrewBonus = numberOfBinsBonus * binBonusRate;
-    console.log(totalCrewBonus);
-    let crew = document.getElementById('crew-total');
-    crew.innerHTML = totalCrewBonus;
+    let crewBonusTotal = numberOfBinsBonus * binBonusRate;
+    let employeeTotalBonus = crewBonusTotal / numberOfPPl;
+    console.log(crewBossBonusRate);
+    let crewBossBonus = numberOfBinsBonus * crewBossBonusRate;
+    $('#crewBonusTotal').html('<span> Crew Bonus Total: ' + crewBonusTotal + '</span>')
+    $('#employeeTotalBonus').html('<span> Employee Total Bonus: ' + employeeTotalBonus + '</span');
+    $('#crewBossBonus').html('<span> Crew Boss Bonus: ' + crewBossBonus + '</span>');
     alert('hey');
-  })
-})
+  });
+});
